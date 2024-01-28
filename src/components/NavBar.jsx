@@ -3,7 +3,7 @@ import { auth } from '../firebase/firebaseConfig';
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function NavBar({ handleSearch }) {
+function NavBar({ handleSearch, quantity }) {
 
     const loggedInUser = localStorage.getItem("displayName")
     const totalQuantity = useSelector(state => state.cart.totalQuantity)

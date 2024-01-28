@@ -4,10 +4,15 @@ import NavBar from '../components/NavBar'
 import Categories from '../components/Categories'
 import ProductList from '../components/ProductList'
 import products from '../assets/data/products'
+import Sidebar from '../components/Sidebar'
+
+const MIN = 100;
+const MAX = 12000
 
 function HomePage() {
 
     const [data, setData] = useState(products)
+    const [values, setValues] = useState([MIN, MAX])
 
     // useEffect(() => {
     //     const filteredProducts = products.filter(
@@ -33,12 +38,22 @@ function HomePage() {
         })
     }
 
+    console.log(products[0].price);
+
+    const handlePrice = () => {
+            const filteredProducts = products.filter((item)=>values[0] <= item.price <= values[1])
+        setData(filteredProducts)
+        }
+
     return (
         <div>
-            <NavBar handleSearch={handleSearch} />
-            <Categories handleFilter={handleFilter} />
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <ProductList data={data} />
+            <Sidebar values={ values} setValues={setValues} handlePrice={handlePrice} MIN={MIN} MAX={MAX} />
+            <div style={{ marginLeft: '25%' }}>
+                <NavBar handleSearch={handleSearch} />
+                <Categories handleFilter={handleFilter} />
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <ProductList data={data} />
+                </div>
             </div>
         </div>
     )

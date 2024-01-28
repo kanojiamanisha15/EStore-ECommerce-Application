@@ -7,16 +7,16 @@ import { db } from '../firebase/firebaseConfig'
 
 function ProductCard({ item }) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     let Product
     const addToCart = () => {
-        dispatch(cartActions.addItem({
-            id: item.id,
-            productName: item.productName,
-            price: item.price,
-            imgUrl: item.imgUrl
-        }))
+        // dispatch(cartActions.addItem({
+        //     id: item.id,
+        //     productName: item.productName,
+        //     price: item.price,
+        //     imgUrl: item.imgUrl
+        // }))
         alert("Product added to the cart")
         // console.log(item);
         if (item.id !== null) {
@@ -45,8 +45,8 @@ function ProductCard({ item }) {
                 <div class="product-bottom-details">
                     <div class="product-price"><small>$96.00</small>${item.price}</div>
                     <div class="product-links">
-                        <a href=""><i class="fa fa-heart">Like</i></a>
-                        <button href="" onClick={addToCart}><i class="fa fa-shopping-cart">Add to Cart</i></button>
+                        <button><i class="fa fa-heart">Like</i></button>
+                        <button onClick={addToCart}><i class="fa fa-shopping-cart">Add to Cart</i></button>
                     </div>
                 </div>
             </div>
