@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Slider, Switch } from 'antd';
 
 
 
-function Sidebar({values, setValues, MIN, MAX, handlePrice}) {
+function Sidebar({handlePrice}) {
+     const MIN = 0;
+     const MAX = 800
+    const [values, setValues] = useState([0,0])
+
+ const handleChange = (values)=>{
+     setValues(values)
     
-
-    console.log('values', values);
-
+ }
+ useEffect(() => {
+  setValues([MIN,MAX])
+ }, [])
+ const handleComplete=(value)=>{
+     handlePrice(value)
+ }
     return (
         <>
             <SideSection className='sidebar' style={{ fontSize: '22px', fontWeight: 'normal', marginBottom: '20px' }}>
@@ -46,7 +56,7 @@ function Sidebar({values, setValues, MIN, MAX, handlePrice}) {
                     <Small>
                         Current Range: ${values[0]} - ${values[1]}
                     </Small>
-                    <Slider range value={values} onChange={setValues} min={MIN} max={MAX}/>
+                    <Slider range value={values} onChange={(e)=> handleChange(e)} onChangeComplete={(e) =>  handleComplete(e)} min={MIN} max={MAX}/>
                 </div>
                 <div className='sorting'>Sorting</div>
             </SideSection>

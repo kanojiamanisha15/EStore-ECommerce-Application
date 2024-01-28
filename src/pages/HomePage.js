@@ -6,13 +6,12 @@ import ProductList from '../components/ProductList'
 import products from '../assets/data/products'
 import Sidebar from '../components/Sidebar'
 
-const MIN = 100;
-const MAX = 12000
+
 
 function HomePage() {
 
     const [data, setData] = useState(products)
-    const [values, setValues] = useState([MIN, MAX])
+
 
     // useEffect(() => {
     //     const filteredProducts = products.filter(
@@ -40,14 +39,19 @@ function HomePage() {
 
     console.log(products[0].price);
 
-    const handlePrice = () => {
-            const filteredProducts = products.filter((item)=>values[0] <= item.price <= values[1])
-        setData(filteredProducts)
+    const handlePrice = (values) => {
+            const filteredProducts = products.filter((item)=>{
+                 if(item.price > values[0] && item.price < values[1]){
+                     return item
+                 }
+                })
+            setData(filteredProducts)
+           
         }
 
     return (
         <div>
-            <Sidebar values={ values} setValues={setValues} handlePrice={handlePrice} MIN={MIN} MAX={MAX} />
+            <Sidebar  handlePrice={handlePrice} />
             <div style={{ marginLeft: '25%' }}>
                 <NavBar handleSearch={handleSearch} />
                 <Categories handleFilter={handleFilter} />
